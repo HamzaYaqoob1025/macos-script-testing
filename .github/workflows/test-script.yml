@@ -1,0 +1,20 @@
+name: Test macOS Script
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Make the script executable
+      run: chmod +x ./retrieve_email.sh
+
+    - name: Run the script
+      run: ./retrieve_email.sh
+      env:
+        ADDIGY_API_KEY: ${{ secrets.ADDIGY_API_KEY }}
+        ADDIGY_API_SECRET: ${{ secrets.ADDIGY_API_SECRET }}
