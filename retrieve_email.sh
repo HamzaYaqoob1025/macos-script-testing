@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# Configuration
+# Configuration (These values wont be used since we're mocking the data)
 ADDIGY_API_KEY="YOUR_ADDIGY_API_KEY"
 ADDIGY_API_SECRET="YOUR_ADDIGY_API_SECRET"
+
+# Simulate Device ID retrieval
+DEVICE_ID="mock-device-id"
+echo "Simulated Device ID: $DEVICE_ID"
+
+# Simulate User Email retrieval
+USER_EMAIL="mockuser@example.com"
+echo "Simulated User Email: $USER_EMAIL"
 
 # Check if jq is installed; if not, install it
 if ! command -v jq &> /dev/null; then
@@ -16,20 +24,6 @@ if ! command -v jq &> /dev/null; then
     fi
 fi
 
-# Retrieve the current device's Addigy device ID
-DEVICE_ID=$(curl -s -X GET "https://api.addigy.com/api/v2/devices/current" -H "Authorization: Bearer $ADDIGY_API_KEY" | jq -r '.id')
+# Output to verify script execution
+echo "Script executed successfully with the simulated environment."
 
-if [ -z "$DEVICE_ID" ]; then
-    echo "Error: Unable to retrieve device ID."
-    exit 1
-fi
-
-# Retrieve the user's email address from Addigy API
-USER_EMAIL=$(curl -s -X GET "https://api.addigy.com/api/v2/devices/$DEVICE_ID" -H "Authorization: Bearer $ADDIGY_API_KEY" | jq -r '.attributes.IdentityEmail')
-
-if [ -z "$USER_EMAIL" ]; then
-    echo "Error: Unable to retrieve user email from Addigy for the current user."
-    exit 1
-else
-    echo "User email retrieved: $USER_EMAIL"
-fi
