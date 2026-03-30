@@ -1,1 +1,1 @@
-bash file
+bash file go go 
