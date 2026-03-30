@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Configuration (These values won't be used since we're mocking the data)
+# Configuration 
 ADDIGY_API_KEY="YOUR_ADDIGY_API_KEY"
 ADDIGY_API_SECRET="YOUR_ADDIGY_API_SECRET"
 
